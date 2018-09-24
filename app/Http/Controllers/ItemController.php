@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use App\Manufacturer;
+use App\Review;
+use App\User;
 
 class ItemController extends Controller
 {
     public function __construct() {
          $this->middleware('auth', ['except'=>['index','show']]);
+         
      }
     /**
      * Display a listing of the resource.
@@ -19,8 +22,23 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::all();
+        /*$reivew = Review::all();
+        $items = Item::with('review')->get();
+        $items = DB::table('items')
+                            ->selectRaw('items.*,count(reviews.id)as numberOfReview,avg(reviews.rating) as AvgRating, reviews.item_id')
+                            ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
+                            ->groupBy('items.id')
+                            ->get();*/
+        $items = Item::selectRaw('items.*,count(reviews.id)as numberOfReview,avg(reviews.rating) as AvgRating, reviews.item_id, reviews.detail,reviews.date')
+                            ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
+                            ->groupBy('items.id')
+                            ->get();
+        // dd($items); 
+        
         return view('items.index')->with('items', $items);
     }
+    
+
 
     /**
      * Show the form for creating a new resource.
@@ -43,7 +61,7 @@ class ItemController extends Controller
         $this->validate($request,[
             'manufacturer' => 'exists:manufacturers,id',
             'name' => 'required|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
             'type' => 'required|max:50',
             'description' => 'required|max:255'
             ]);
@@ -68,9 +86,12 @@ class ItemController extends Controller
     public function show($id)
     {
         $item = Item::find($id);
-        return view('items.show')->with('item', $item);
+        // $review = Review::where('item_id', '=', $id)->get();
+        $reviews = $item->users()->get();
+        // dd($review);
+        return view('items.show',['item'=> $item, 'reviews' => $reviews]);
+        
     }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -95,6 +116,14 @@ class ItemController extends Controller
         
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'manufacturer' => 'exists:manufacturers,id',
+            'name' => 'required|max:255',
+            'price' => 'required|numeric|min:0',
+            'type' => 'required|max:50',
+            'description' => 'required|max:255'
+            ]);
+        
         $item = Item::find($id);
         $item->manufacturer_id = $request->manufacturer;
         $item->name = $request->name;

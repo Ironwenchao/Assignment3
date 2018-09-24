@@ -12,9 +12,10 @@
 */
 use App\Item;
 use App\Manufacturer;
-use App\Users;
+use App\User;
 
 Route::resource('item', 'ItemController');
+Route::resource('review', 'ReviewController');
 
 Route::get('/', function () {
     return view('home');
@@ -60,6 +61,24 @@ Route::get('/test', function () {
     /*dd(Item::find(1)->manufacturer);*/
 });
 
+Route::get('/test',function() {
+    /*$user = User::find(1);
+    //$items = $user->items;
+    // dd($items);
+    
+    $name = 'Apple';
+    $items = $user->items()->whereRaw('name like ?',
+                    array("%$name%"))->get();
+    dd($items);*/
+    
+    $name = 'Apple';
+    
+    $items = Item::whereHas('manufacturer', function($query)use($name){
+        return $query->whereRaw('name like ?',array("%$name%"));
+    })->get();
+    dd($items);
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -68,3 +87,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+

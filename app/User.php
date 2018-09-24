@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    /*function items() {
+        return $this->belongsToMany('App\Item','reviews');
+    }*/
+    
+    function items() {
+        return $this->belongsToMany('App\Item','reviews')->withPivot('detail');
+    }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Manufacturer extends Model
 {
     //
-    function products() {
+    function itmes() {
         return $this->hasMany('App\Item');
 }
 }

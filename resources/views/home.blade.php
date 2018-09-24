@@ -20,4 +20,6 @@
         </div>
     </div>
 </div>
+
+<a href="/item/show">Show all items</a>
 @endsection

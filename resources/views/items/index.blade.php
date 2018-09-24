@@ -11,4 +11,18 @@
 </ul>
 
 <a href="/item/create">Add a new item</a>
+
+    <div>
+        @foreach ($items as $item)
+                <div>
+                  <div>
+                    <ul class="list-unstyled">
+                        <li><a href="{{url("item/$item->id")}}">{{ $item->item_name }}</a></li>
+                        <!--If there is no rating, shows no rating-->
+                        <li><p>{{ $item->item_detail}}</p></li>
+                    </ul>
+                  </div>
+                </div>
+        @endforeach
+    </div>
 @endsection

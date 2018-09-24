@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
             'email'=>'Amy@gmail.com',
             'password'=> bcrypt('123456'),
             'dateOfBirth' => '1992-1-3',
+            // 'type' => 'admin',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
             ]);
             
