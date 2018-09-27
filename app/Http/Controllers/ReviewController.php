@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Item;
 use App\Manufacturer;
-use App\Country;
 use App\Review;
 use Illuminate\Support\Facades\Auth;
 class ReviewController extends Controller
@@ -42,7 +41,6 @@ class ReviewController extends Controller
         $this->validate($request,[
             "rating" => "required | integer| min:0| max:5",
             "detail" => "required | max:1000",
-            "date" => "required | date",
         ]);
         
         $review = new Review();
@@ -50,7 +48,6 @@ class ReviewController extends Controller
         $review->user_id = $request->user;
         $review->rating = $request->detail;
         $review->detail = $request->detail;
-        $review->date = $request->date;
         $review->save();
         return redirect("/item/$item_id");
         
@@ -79,7 +76,8 @@ class ReviewController extends Controller
         $author = $review->user_id;*/
         
         $review= Review::find($id);
-        return view('reviews.edit') -> with('review', $review) -> with('manufacturers', Manufacturer::all()) -> with('item',$item);
+        $items = $review->item()->get();
+        return view('reviews.edit') -> with('review', $review) -> with('items',$items);
         /*$eligibleUsers = (Auth::check() && Auth::user()->isAdmin() | (Auth::check() && (Auth::user()->id == $author)));
         //Only admin can edit all review and only the authors can edit their own reviews but guests and other users can't
         if(!$eligibleUsers) {
@@ -104,7 +102,6 @@ class ReviewController extends Controller
         $this->validate($request,[
             "rating" => "required | integer| min:0| max:5",
             "detail" => "required | max:1000",
-            "date" => "required | date",
         ]);
         
         $review = new Review();
@@ -112,21 +109,20 @@ class ReviewController extends Controller
         $review->user_id = $request->user;
         $review->rating = $request->detail;
         $review->detail = $request->detail;
-        $review->date = $request->date;
         $review->save();
         return redirect("/item/$item_id");
         
         // dd($product_id);
         
         //if administrator edits the review, the author is still the original author instead of administrator name
-        if(Auth::user()->isAdmin()) {
+        /*if(Auth::user()->isAdmin()) {
             $user_id = $review->user_id;
         } else {
             $review->user_id = $user_id;
         }
         
         $review->save();
-        return redirect("/product/$product_id");
+        return redirect("/product/$product_id");*/
     }
     /**
      * Remove the specified resource from storage.

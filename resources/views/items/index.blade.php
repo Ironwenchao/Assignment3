@@ -10,7 +10,8 @@
     @endforeach
 </ul>
 
-<a href="/item/create">Add a new item</a>
+<a href="/item/create">Create a new item</a><br>
+<li><a href="/review/create">Create a new review</a></li>
 
     <div>
         @foreach ($items as $item)

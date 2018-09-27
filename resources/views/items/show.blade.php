@@ -13,7 +13,7 @@
             <p>Description: {{$item->description}}</p>
             <p><a href='/item/{{$item->id}}/edit'>Edit</a></p>
         </div>
-
+        <div>
         <p>
             <form method="POST" action="/item/{{$item->id}}">
             {{csrf_field()}}
@@ -21,6 +21,7 @@
             <input type="submit" value="Delete" class="link">
             </form>
         </p>
+        </div>
     </div>
     
     <div>
@@ -32,8 +33,11 @@
                     </div>
                     <div class="col-12 col-sm-10 col-md-10 list-unstyled">
                         <li class="rating">Rating: {{$review -> pivot -> rating}} of 5</li>
-                        <li class='date'>{{$review -> pivot -> date}}</li>
-                        <li class='detail'>{{$review -> pivot -> detail}}</li>
+                        <li class='date'>Date: {{$review -> pivot -> created_at}}</li>
+                        <li class='detail'>Review detail: {{$review -> pivot -> detail}}</li>
+                        <li><a href="/review/{{$review -> pivot -> id}}/edit">Edit review</a></li>
+                        <li><a href="/review/create">Create a new review</a></li>
+
                     </div>
                     
             </div>

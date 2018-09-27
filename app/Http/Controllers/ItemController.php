@@ -29,7 +29,7 @@ class ItemController extends Controller
                             ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
                             ->groupBy('items.id')
                             ->get();*/
-        $items = Item::selectRaw('items.*,count(reviews.id)as numberOfReview,avg(reviews.rating) as AvgRating, reviews.item_id, reviews.detail,reviews.date')
+        $items = Item::selectRaw('items.*,count(reviews.id)as numberOfReview,avg(reviews.rating) as AvgRating, reviews.item_id, reviews.detail')
                             ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
                             ->groupBy('items.id')
                             ->get();

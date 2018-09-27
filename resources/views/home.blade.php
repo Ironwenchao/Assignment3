@@ -21,5 +21,5 @@
     </div>
 </div>
 
-<a href="/item/show">Show all items</a>
+<a href="/item">Show all items</a>
 @endsection

@@ -8,7 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    /*Here shows two types users one is simple user, the other one is moderator*/
 
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -34,4 +36,6 @@ class User extends Authenticatable
     function items() {
         return $this->belongsToMany('App\Item','reviews')->withPivot('detail');
     }
+    
+
 }

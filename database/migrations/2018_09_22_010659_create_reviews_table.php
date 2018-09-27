@@ -19,7 +19,6 @@ class CreateReviewsTable extends Migration
             $table->integer('user_id');
             $table->integer('rating');
             $table->string('detail');
-            $table->date('date');
             $table->rememberToken();
             $table->timestamps();
         });
