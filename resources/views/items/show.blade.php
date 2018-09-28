@@ -36,10 +36,12 @@
                         <li class='date'>Date: {{$review -> pivot -> created_at}}</li>
                         <li class='detail'>Review detail: {{$review -> pivot -> detail}}</li>
                         <li><a href="/review/{{$review -> pivot -> id}}/edit">Edit review</a></li>
-                        <li><a href="/review/create">Create a new review</a></li>
 
                     </div>
-                    
-            </div>
+             
+    </div>
         @endforeach
+        
+    <li><a href="/review/create">Create a new review</a></li>
+
 @endsection

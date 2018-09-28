@@ -21,27 +21,20 @@
         {{csrf_field()}}
         {{ method_field('PUT') }}
             <div class="col-3">
-                <p><label>Rating: </label>
-                <select name="Rating">
-                       <option> 0 of 5 </option>
-                       <option> 1 of 5 </option>
-                       <option> 2 of 5 </option>
-                       <option> 3 of 5 </option>
-                       <option> 4 of 5 </option>
-                       <option> 5 of 5 </option>
-                </select> <br><br>
-                
+               
+                <p><label>Rating: </label><input type="text" name="rating" value="{{$review->rating}}"></p>
+
                 <!--<option value="{{$review->rating}}" selected="selected">{{$review->rating}}</option>-->
             </div>
             <div class="col-6">
                 <p><label>Detail: </label></p>
-                <p><textarea name="description" rows=6 cols=30 >{{$review->detail}}</textarea><br></p>
+                <p><textarea name="detail" rows=6 cols=30 >{{$review->detail}}</textarea><br></p>
                 <!--<input type="text" name="price" value="{{$review->detail}}"><br></p>-->
             </div>
-            <div class="col-9">
-                <p><label>Date</label>
-                <input type="text" name="type" value="{{$review->date}}"><br></p>
-            </div>
+            <!--<div class="col-9">-->
+            <!--    <p><label>Date</label>-->
+            <!--    <input type="text" name="type" value="{{$review->date}}"><br></p>-->
+            <!--</div>-->
         
         <p><select name="item">
         @foreach ($items as $item)

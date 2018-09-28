@@ -15,11 +15,14 @@
     </div>
     @endif
     
-    <form method="POST" action="/review">
+    <form method="POST" action="/review"> 
     {{csrf_field()}}
     <p><label>Rating: </label><input type="text" name="rating" value="{{old('rating')}}"></p>
-    <p><label>detail: </label><input type="text" name="detail" value="{{old('detail')}}"></p>
-    <p><label>date: </label><input type="text" name="date" value="{{old('date')}}"></p>
+    <p>Detail: </p>
+    <p><textarea name="detail" rows=6 cols=30 >{{old('detail')}}</textarea><br></p>
+
+    <!--<p><label>detail: </label><input type="text" name="detail" value="{{old('detail')}}"></p>-->
+    <!--<p><label>date: </label><input type="text" name="date" value="{{old('date')}}"></p>-->
     <p><select name="item">
         @foreach ($items as $item)
             @if($item->id == old('item'))

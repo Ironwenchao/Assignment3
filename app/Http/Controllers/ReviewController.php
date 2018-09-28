@@ -43,10 +43,14 @@ class ReviewController extends Controller
             "detail" => "required | max:1000",
         ]);
         
+        
+        
+        $user_id = Auth::user()->id; /*this is call the current user who has logined*/
+        // $user_id = Auth::id();
         $review = new Review();
-        $review->item_id = $request->item;
-        $review->user_id = $request->user;
-        $review->rating = $request->detail;
+        $item_id = $review->item_id = $request->item;
+        $review->user_id = $user_id;
+        $review->rating = $request->rating;
         $review->detail = $request->detail;
         $review->save();
         return redirect("/item/$item_id");
@@ -104,25 +108,17 @@ class ReviewController extends Controller
             "detail" => "required | max:1000",
         ]);
         
-        $review = new Review();
-        $review->item_id = $request->item;
-        $review->user_id = $request->user;
-        $review->rating = $request->detail;
+        $user_id = Auth::user()->id; /*this is call the current user who has logined*/
+
+        
+        $review = Review::find($id);
+        $review->user_id = $user_id;
+        $review->rating = $request->rating;
         $review->detail = $request->detail;
+        $item = $review->item_id;
         $review->save();
-        return redirect("/item/$item_id");
-        
-        // dd($product_id);
-        
-        //if administrator edits the review, the author is still the original author instead of administrator name
-        /*if(Auth::user()->isAdmin()) {
-            $user_id = $review->user_id;
-        } else {
-            $review->user_id = $user_id;
-        }
-        
-        $review->save();
-        return redirect("/product/$product_id");*/
+        return redirect("/item/$item");
+
     }
     /**
      * Remove the specified resource from storage.

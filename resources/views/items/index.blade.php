@@ -11,7 +11,6 @@
 </ul>
 
 <a href="/item/create">Create a new item</a><br>
-<li><a href="/review/create">Create a new review</a></li>
 
     <div>
         @foreach ($items as $item)
@@ -26,4 +25,5 @@
                 </div>
         @endforeach
     </div>
+
 @endsection
