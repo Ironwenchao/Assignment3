@@ -7,6 +7,10 @@ use App\Review;
 use Illuminate\Support\Facades\Auth;
 class ReviewController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -45,8 +49,8 @@ class ReviewController extends Controller
         
         
         
-        $user_id = Auth::user()->id; /*this is call the current user who has logined*/
-        // $user_id = Auth::id();
+        //$user_id = Auth::user()->id; /*this is call the current user who has logined
+        $user_id = Auth::id();
         $review = new Review();
         $item_id = $review->item_id = $request->item;
         $review->user_id = $user_id;
@@ -55,6 +59,14 @@ class ReviewController extends Controller
         $review->save();
         return redirect("/item/$item_id");
         
+        // Auth::user()->reviews()->create([
+        //     'detail' => $request['detail'],
+        //     'rating' => $request['rating'],
+        //     'item_id' => $request['item_id'],
+        // ]);
+        
+        // $item_id = $request->item_id;
+        // return redirect("/item/$item_id");
         
     }
     /**
@@ -78,19 +90,20 @@ class ReviewController extends Controller
         /*$review = Review::find($id);
         $product = $review->products;
         $author = $review->user_id;*/
-        
         $review= Review::find($id);
-        $items = $review->item()->get();
-        return view('reviews.edit') -> with('review', $review) -> with('items',$items);
-        /*$eligibleUsers = (Auth::check() && Auth::user()->isAdmin() | (Auth::check() && (Auth::user()->id == $author)));
+        $items = $review->item;
+        // dd($items->id);
+        // $items = $review->item()->get();
+        $author = $review->user_id;
+        $eligibleUsers = (Auth::check() && Auth::user()->isAdmin() | (Auth::check() && (Auth::user()->id == $author)));
         //Only admin can edit all review and only the authors can edit their own reviews but guests and other users can't
         if(!$eligibleUsers) {
-            echo "<h2 style='color:blue;'>You don't have right to edit the product. Redirect to home page in 5 seconds......</h2>";
-            header( "refresh:5;url=/product/$product->id" );
+            echo "<h2 style='color:red;'>Sorry! You cannot edit review. The page will back to the Item list in 5 seconds!</h2>";
+            header( "refresh:5;url=/item/$items->id" );
         } elseif($eligibleUsers) {
             
-            return view('reviews.edit_form', ['review' => $review, 'product' => $product]);
-        }*/
+        return view('reviews.edit') -> with('review', $review) -> with('items',$items);
+        }
     }
     /**
      * Update the specified resource in storage.
@@ -131,5 +144,22 @@ class ReviewController extends Controller
         $review = Review::find($id);    
         $review->delete();
         return redirect ('/item');
+    }
+    
+    public function dateOfReviewsDESC() {
+        /*
+            Select product, count number product and calculate avergae of rating, order by number of reviews in descending order
+        */
+        
+        $reviews = Review::selectRaw('reviews.*, count(reviews.id) as numberOfReview, avg(reviews.rating) as AvgRating, reviews.item_id, reviews.created_at')
+                          ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
+                          ->groupBy('reviews.id')
+                          ->orderBy('reviews.created_at', 'desc')
+                          ->get();
+        
+        // $products = Product::all();
+        
+        return view('items.sortByDate', ['reviews' => $reviews]);
+        
     }
 }

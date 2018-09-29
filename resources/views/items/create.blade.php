@@ -15,7 +15,6 @@
     </div>
     @endif
     
-    
     <form method="POST" action="/item">
     {{csrf_field()}}
     <p><label>Name: </label><input type="text" name="name" value="{{old('name')}}"></p>

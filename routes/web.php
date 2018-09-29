@@ -23,28 +23,7 @@ Route::get('/', function () {
 
 
 Route::get('/test', function () {
-    /*$item = new Item;
-    $item->name = 'ipod';
-    $item->price = 19.99;
-    $item->type = 'mobile phone';
-    $item->description = 'this is a good device!';
-    $item->save(); // save to products table
-    $id = $item->id; // retrieve the id of the newly created product object
-    dd($id);*/
     
-    /*$item = Item::create(array('name' => 'Playstation', 'price' => 450, 'type' => 'game device', 'description' => 'this is a good game device!'));
-    dd($item);*/
-    
-    /*$item = Item::all();
-    dd($item);*/
-    
-    
-    /*$items = Item::all();
-    foreach ($items as $item) {
-        echo $item -> name;
-    }*/
-    
-    /*$item = Item::find(1);*/
     
     /*$item = Item::where('price', '>', 2000)->get();*/
     
@@ -61,7 +40,7 @@ Route::get('/test', function () {
     /*dd(Item::find(1)->manufacturer);*/
 });
 
-Route::get('/test',function() {
+/*Route::get('/test',function() {
     /*$user = User::find(1);
     //$items = $user->items;
     // dd($items);
@@ -71,27 +50,28 @@ Route::get('/test',function() {
                     array("%$name%"))->get();
     dd($items);*/
     
-    $name = 'Apple';
+    /*$name = 'Apple';
     
     $items = Item::whereHas('manufacturer', function($query)use($name){
         return $query->whereRaw('name like ?',array("%$name%"));
     })->get();
     dd($items);
+});*/
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')    
+    ->name('home');
+    
+Route::get('/admin', 'AdminController@admin')    
+    ->middleware('is_admin')    
+    ->name('admin');
 
 
-
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/sortbyreviews', 'ItemController@numberOfReviewsDESC');
+Route::get('/sortbyrating', 'ItemController@avgRatingDESC');
+Route::get('/sortByDate', 'ItemController@dateOfReviewsDESC');

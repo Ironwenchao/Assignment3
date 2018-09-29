@@ -39,19 +39,7 @@
                             </div>
                         </div>
                         <!--this is for Date of Birth part, when the user is registering-->
-                        <div class="form-group{{ $errors->has('dateOfBirth') ? ' has-error' : '' }}">
-                            <label for="dateOfBirth" class="col-md-4 control-label">Date of Birth</label>
-
-                            <div class="col-md-6">
-                                <input id="dateOfBirth" type="text" class="form-control" name="dateOfBirth" value="{{ old('dateOfBirth') }}" required>
-
-                                @if ($errors->has('dateOfBirth'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('dateOfBirth') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+                        
                         <!--this is for Password part, when the user is registering-->
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>

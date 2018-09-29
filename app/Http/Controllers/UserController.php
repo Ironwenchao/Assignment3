@@ -11,6 +11,18 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     
+     /*this is show the different ability between the common user and moderator*/
+     public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['show', 'create', 'store', 'index']
+        ]);
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+    }
+     
     public function index()
     {
         $users = User::all();

@@ -4,11 +4,7 @@
 @endsection
 @section('content')
 <h1>Item List</h1>
-<ul>
-    @foreach ($items as $item)
-        <a href="/item/{{$item->id}}"><li>{{ $item->name }}</li></a>
-    @endforeach
-</ul>
+
 
 <a href="/item/create">Create a new item</a><br>
 
@@ -17,9 +13,9 @@
                 <div>
                   <div>
                     <ul class="list-unstyled">
-                        <li><a href="{{url("item/$item->id")}}">{{ $item->item_name }}</a></li>
+                        <li><a href="{{url("item/$item->id")}}">{{ $item->name }}</a></li>
                         <!--If there is no rating, shows no rating-->
-                        <li><p>{{ $item->item_detail}}</p></li>
+                        <li><p>{{ $item->description}}</p></li>
                     </ul>
                   </div>
                 </div>

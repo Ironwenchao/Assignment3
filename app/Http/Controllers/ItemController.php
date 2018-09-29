@@ -87,8 +87,11 @@ class ItemController extends Controller
     {
         $item = Item::find($id);
         // $review = Review::where('item_id', '=', $id)->get();
-        $reviews = $item->users()->get();
+        // $reviews = $item->users()->get();
         // dd($review);
+        $reviews = $item->users()->orderBy('pivot_created_at', 'desc')->paginate(5);
+        // $reviews = $item->DB::table('reviews')->orderBy('pivot_created_at','desc')->paginate(5);
+        // dd($reviews);
         return view('items.show',['item'=> $item, 'reviews' => $reviews]);
         
     }
@@ -146,5 +149,60 @@ class ItemController extends Controller
         $item->delete();
         return redirect ('/item');
     }
+    
+    
+    public function numberOfReviewsDESC() {
+        /*
+            Select product, count number product and calculate avergae of rating, order by number of reviews in descending order
+        */
+        
+        $items = Item::selectRaw('items.*, count(reviews.id) as numberOfReview, avg(reviews.rating) as AvgRating, reviews.item_id')
+                          ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
+                          ->groupBy('items.id')
+                          ->orderBy('numberOfReview', 'desc')
+                          ->get();
+        
+        // $products = Product::all();
+        
+        return view('items.sortByReview', ['items' => $items]);
+        
+    }
+    
+    
+    
+    public function avgRatingDESC() {
+        /*
+            Select product, count number product and calculate avergae of rating, order by number of reviews in descending order
+        */
+        
+        $items = Item::selectRaw('items.*, count(reviews.id) as numberOfReview, avg(reviews.rating) as AvgRating, reviews.item_id')
+                          ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
+                          ->groupBy('items.id')
+                          ->orderBy('AvgRating', 'desc')
+                          ->get();
+        
+        
+        return view('items.sortByRating', ['items' => $items]);
+    }
+    
+    
+    
+        public function dateOfReviewsDESC() {
+        /*
+            Select product, count number product and calculate avergae of rating, order by number of reviews in descending order
+        */
+        
+        $reviews = Review::selectRaw('reviews.*, count(reviews.id) as numberOfReview, avg(reviews.rating) as AvgRating, reviews.item_id, reviews.created_at')
+                          /*->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')*/
+                          ->groupBy('reviews.id')
+                          ->orderBy('reviews.created_at', 'desc')
+                          ->get();
+        
+        // $products = Product::all();
+        
+        return view('reviews.sortByDate', ['reviews' => $reviews]);
+        }
 }
+
+
 

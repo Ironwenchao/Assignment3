@@ -15,8 +15,8 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('item_id');
-            $table->integer('user_id');
+            $table->integer('item_id');/*this is the foreign key for the review table*/
+            $table->integer('user_id');/*this is the foreign key for the review table*/
             $table->integer('rating');
             $table->string('detail');
             $table->rememberToken();

@@ -11,12 +11,19 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        /*this is an admin seeder*/
+        DB::table('users')->insert([
+            'name' => 'Moderator',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123456'),
+            'type' => 'admin',
+        ]);
+        
+        /*these are the common users' seeder*/
         DB::table('users')->insert([
             'name'=>'Amy',
             'email'=>'Amy@gmail.com',
             'password'=> bcrypt('123456'),
-            'dateOfBirth' => '1992-1-3',
-            // 'type' => 'admin',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
             ]);
             
@@ -25,7 +32,6 @@ class UsersTableSeeder extends Seeder
             'name'=>'Bob',
             'email'=>'Bob@gmail.com',
             'password'=> bcrypt('123456'),
-            'dateOfBirth' => '1992-3-23',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
             ]);
             
@@ -34,7 +40,6 @@ class UsersTableSeeder extends Seeder
             'name'=>'Candy',
             'email'=>'Candy@gmail.com',
             'password'=> bcrypt('123456'),
-            'dateOfBirth' => '1998-9-23',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
             ]); 
             
@@ -43,7 +48,6 @@ class UsersTableSeeder extends Seeder
             'name'=>'Dina',
             'email'=>'Dina@gmail.com',
             'password'=> bcrypt('123456'),
-            'dateOfBirth' => '1968-9-3',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
             ]);
             
@@ -52,7 +56,6 @@ class UsersTableSeeder extends Seeder
             'name'=>'Edwin',
             'email'=>'Edwin@gmail.com',
             'password'=> bcrypt('123456'),
-            'dateOfBirth' => '1978-12-3',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
             ]);
             
@@ -61,7 +64,6 @@ class UsersTableSeeder extends Seeder
             'name'=>'Frank',
             'email'=>'Frank@gmail.com',
             'password'=> bcrypt('123456'),
-            'dateOfBirth' => '1967-2-9',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
             ]);
     }

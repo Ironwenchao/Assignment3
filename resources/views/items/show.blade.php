@@ -42,6 +42,9 @@
     </div>
         @endforeach
         
+        {{ $reviews->links()}}
+        
+        
     <li><a href="/review/create">Create a new review</a></li>
 
 @endsection
