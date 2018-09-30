@@ -14,9 +14,11 @@
        </ul>
     </div>
     @endif
+   
     
-    <form method="POST" action="/item">
+    <form method="POST" action="/item" enctype="multipart/form-data">
     {{csrf_field()}}
+    
     <p><label>Name: </label><input type="text" name="name" value="{{old('name')}}"></p>
     <p><label>Price: </label><input type="text" name="price" value="{{old('price')}}"></p>
     <p><label>Type: </label><input type="text" name="type" value="{{old('type')}}"></p>
@@ -30,5 +32,7 @@
             @endif
         @endforeach
     </select></p>
-    <input type="submit" value="Create"> </form>
+    <p><input type="file" name="image"></p>
+    <input type="submit" value="Create"> 
+    </form>
 @endsection

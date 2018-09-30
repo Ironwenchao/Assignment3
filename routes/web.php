@@ -16,6 +16,15 @@ use App\User;
 
 Route::resource('item', 'ItemController');
 Route::resource('review', 'ReviewController');
+Route::get('/MyERD',function(){
+    return view('ERD.myERD');
+});
+
+Route::get('/Documentation',function(){
+    return view('Documentation.documentation');
+});
+// Route::get('/myERD', function () {return view('ERD.myERD'); });
+
 
 Route::get('/', function () {
     return view('home');
@@ -24,20 +33,6 @@ Route::get('/', function () {
 
 Route::get('/test', function () {
     
-    
-    /*$item = Item::where('price', '>', 2000)->get();*/
-    
-    /*$count = Item::where('price', '>', 2000)->first();
-    dd($count);*/
-    
-    /*$itmes = Item::orderBy('price', 'asc')->get();*/
-    
-    /*$itme = Item::find(10); $itme->price = 300; $itme->save();
-    dd($itme);*/
-    
-    /*$manufacturers = App\Manufacturer::find(1)->items;
-    dd($manufacturers);*/
-    /*dd(Item::find(1)->manufacturer);*/
 });
 
 /*Route::get('/test',function() {

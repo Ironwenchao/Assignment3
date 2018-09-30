@@ -47,7 +47,24 @@ class ReviewController extends Controller
             "detail" => "required | max:1000",
         ]);
         
+        /*$existing = Review::where('user_id', '=', Auth::user()->id)->where('item_id', '=', $request->item_id) ->exists();
         
+        // use reviews() in User model, if the current users has not given a review for the product, it will create a review
+        if (!$existing) {
+            Auth::user()->reviews()->create([
+                'detail' => $request['detail'],
+                'rating' => $request['rating'],
+                'item_id' => $request['item_id'],
+            ]);
+        
+        } else {
+            session()->flash('warning', 'You have reviewed this before');
+        }
+    
+        //get current product id
+        $item_id = $request->item_id;
+        return redirect("/item/$item_id");        
+    }*/
         
         //$user_id = Auth::user()->id; /*this is call the current user who has logined
         $user_id = Auth::id();
@@ -59,16 +76,10 @@ class ReviewController extends Controller
         $review->save();
         return redirect("/item/$item_id");
         
-        // Auth::user()->reviews()->create([
-        //     'detail' => $request['detail'],
-        //     'rating' => $request['rating'],
-        //     'item_id' => $request['item_id'],
-        // ]);
-        
-        // $item_id = $request->item_id;
-        // return redirect("/item/$item_id");
-        
     }
+    
+    
+    
     /**
      * Display the specified resource.
      *

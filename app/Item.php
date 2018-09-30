@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $fillable = ['manufacturer_id','name', 'price', 'type', 'description'];
+    protected $fillable = ['manufacturer_id','name', 'price', 'type', 'description','image'];
     
     function manufacturer() {
         return $this->belongsTo('App\Manufacturer');

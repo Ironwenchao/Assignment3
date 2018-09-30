@@ -17,6 +17,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '1593',
             'type' => 'mobile phone',
             'description' => '5.8-inch Super Retina HD display with HDR and True Tone',
+            'image'=> 'item_images/AppleiPhoneX.jpeg',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
         ]);
         
@@ -27,6 +28,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '1200',
             'type' => 'mobile phone',
             'description' => 'Long lasting 4,000mAh battery',
+            'image'=> 'item_images/SamsungGalacy9.jpeg',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
         ]);
         
@@ -37,6 +39,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '900',
             'type' => 'mobile phone',
             'description' => 'Cutting-edge processor for super-fast downloads',
+            'image'=> 'item_images/OppoX21.jpeg',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
         ]); 
         
@@ -47,6 +50,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '1250',
             'type' => 'mobile phone',
             'description' => 'Advanced cameras! Wireless charging! All-glass design!',
+            'image'=> 'item_images/AppleiPhone8.jpeg',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
         ]);
         
@@ -56,6 +60,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '1199',
             'type' => 'mobile phone',
             'description' => 'Powerful and efficient Octa-Core Processing!',
+            'image'=> 'item_images/Huaweimate10.jpeg',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
         ]);
         
@@ -66,6 +71,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '2399',
             'type' => 'labtop',
             'description' => 'Quad-core Intel Core i5 processor!',
+            'image'=> 'item_images/AppleMacbook.jpeg',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
         ]);
         
@@ -76,6 +82,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '769',
             'type' => 'camera',
             'description' => '24.2MP APS-C CMOS Sensor! 24.2MP APS-C CMOS Sensor! Wi-Fi/NFC/Bluetooth!',
+            'image'=> 'item_images/CanonEOS750D.jpeg',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
         ]);
         
@@ -86,6 +93,7 @@ class ItemsTableSeeder extends Seeder
             'type' => 'camera',
             'description' => '24.2 MP Exmor R CMOS Sensor! 10fps Continuous Shooting! 
                             693 Phase Detect and 425 Contrast AF Points!',
+            'image'=> 'item_images/SonyILCE-7M3.jpeg',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
         ]);
     }

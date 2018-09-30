@@ -3,10 +3,12 @@
     Items Show
 @endsection
 
+
 @section('content')
     <div>
         <div>
             <h1>{{$item->name}}</h1>
+            <img src="/storage/{{$item->image}}" alt="item image" style="width:150px;height:150px;">
             <p>Price: {{$item->price}}</p>
             <p>Type: {{$item->type}}</p>
             <p>Manufacturer: {{$item->manufacturer->name}}</p>
@@ -38,7 +40,6 @@
                         <li><a href="/review/{{$review -> pivot -> id}}/edit">Edit review</a></li>
 
                     </div>
-             
     </div>
         @endforeach
         

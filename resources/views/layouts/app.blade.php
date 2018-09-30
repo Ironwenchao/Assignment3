@@ -43,7 +43,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a class="nav-link nav-item" href="/manufacturer"> Manufacturers</a></li>
+                            <li><a class="nav-link nav-item" href="/myERD"> MyERD diagram</a></li>
                             <li><a class="nav-link nav-item" href="/item/create">Add a Item</a></li>
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>

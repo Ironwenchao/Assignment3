@@ -22,13 +22,6 @@ class ItemController extends Controller
     public function index()
     {
         $items = Item::all();
-        /*$reivew = Review::all();
-        $items = Item::with('review')->get();
-        $items = DB::table('items')
-                            ->selectRaw('items.*,count(reviews.id)as numberOfReview,avg(reviews.rating) as AvgRating, reviews.item_id')
-                            ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
-                            ->groupBy('items.id')
-                            ->get();*/
         $items = Item::selectRaw('items.*,count(reviews.id)as numberOfReview,avg(reviews.rating) as AvgRating, reviews.item_id, reviews.detail')
                             ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
                             ->groupBy('items.id')
@@ -49,13 +42,10 @@ class ItemController extends Controller
     {
         return view('items.create')->with('manufacturers', Manufacturer::all());
     }
+    
+    
+    // $image_store = request()->file('image')->store(‘products_images', 'public');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -63,11 +53,14 @@ class ItemController extends Controller
             'name' => 'required|max:255',
             'price' => 'required|numeric|min:0',
             'type' => 'required|max:50',
-            'description' => 'required|max:255'
+            'description' => 'required|max:255',
+            // 'image'=> 'required'
             ]);
         
+        $image_store = request()->file('image')->store('item_images', 'public');
         $item = new Item();
         $item->manufacturer_id = $request->manufacturer;
+        $item->image = $image_store;
         $item->name = $request->name;
         $item->price = $request->price;
         $item->type = $request->type;
@@ -77,12 +70,7 @@ class ItemController extends Controller
     }
     
     
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $item = Item::find($id);
@@ -92,6 +80,7 @@ class ItemController extends Controller
         $reviews = $item->users()->orderBy('pivot_created_at', 'desc')->paginate(5);
         // $reviews = $item->DB::table('reviews')->orderBy('pivot_created_at','desc')->paginate(5);
         // dd($reviews);
+        //dd($item);
         return view('items.show',['item'=> $item, 'reviews' => $reviews]);
         
     }
