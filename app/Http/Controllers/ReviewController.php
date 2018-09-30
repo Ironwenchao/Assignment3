@@ -47,36 +47,42 @@ class ReviewController extends Controller
             "detail" => "required | max:1000",
         ]);
         
-        /*$existing = Review::where('user_id', '=', Auth::user()->id)->where('item_id', '=', $request->item_id) ->exists();
-        
+        $existing = Review::where('user_id', '=', Auth::user()->id)->where('item_id', '=', $request->item) ->exists();
+        //dd($request->rating);
         // use reviews() in User model, if the current users has not given a review for the product, it will create a review
         if (!$existing) {
-            Auth::user()->reviews()->create([
-                'detail' => $request['detail'],
-                'rating' => $request['rating'],
-                'item_id' => $request['item_id'],
-            ]);
+            $current_user_id = Auth::user()->id;
+            $user_id = Auth::id();
+            $review = new Review();
+            $item_id = $review->item_id = $request->item;
+            $review->user_id = $user_id;
+            $review->rating = $request->rating;
+            $review->detail = $request->detail;
+            $review->save();
+            
         
-        } else {
+        }
+        else {
             session()->flash('warning', 'You have reviewed this before');
         }
     
         //get current product id
-        $item_id = $request->item_id;
+        // $item_id = $request->item_id;
+        // dd($item_id);
         return redirect("/item/$item_id");        
-    }*/
+    }
         
         //$user_id = Auth::user()->id; /*this is call the current user who has logined
-        $user_id = Auth::id();
-        $review = new Review();
-        $item_id = $review->item_id = $request->item;
-        $review->user_id = $user_id;
-        $review->rating = $request->rating;
-        $review->detail = $request->detail;
-        $review->save();
-        return redirect("/item/$item_id");
+    //     $user_id = Auth::id();
+    //     $review = new Review();
+    //     $item_id = $review->item_id = $request->item;
+    //     $review->user_id = $user_id;
+    //     $review->rating = $request->rating;
+    //     $review->detail = $request->detail;
+    //     $review->save();
+    //     return redirect("/item/$item_id");
         
-    }
+    // }
     
     
     
