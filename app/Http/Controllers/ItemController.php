@@ -157,40 +157,30 @@ class ItemController extends Controller
         
     }
     
-    
-    
-    public function avgRatingDESC() {
-        /*
-            Select product, count number product and calculate avergae of rating, order by number of reviews in descending order
-        */
+       
+        public function showMostRecentReviwed($id)
+    {
+        //This is to show products' details such as product name, price, place of origin, manufacturers etc
+        $item = Item::find($id);
+        //This is to show review details such as author, title, review content, rating etc for each product, order by creation date, 5 reviews per page
+        $reviews = $item->users()->orderBy('pivot_created_at', 'desc')->Paginate(5);
+        // dd($reviews);
         
-        $items = Item::selectRaw('items.*, count(reviews.id) as numberOfReview, avg(reviews.rating) as AvgRating, reviews.item_id')
-                          ->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')
-                          ->groupBy('items.id')
-                          ->orderBy('AvgRating', 'desc')
-                          ->get();
-        
-        
-        return view('items.sortByRating', ['items' => $items]);
+
+        return view('items.sortByMostRecentReviewed', ['item' => $item, 'reviews' => $reviews]);
     }
     
     
-    
-        public function dateOfReviewsDESC() {
-        /*
-            Select product, count number product and calculate avergae of rating, order by number of reviews in descending order
-        */
-        
-        $reviews = Review::selectRaw('reviews.*, count(reviews.id) as numberOfReview, avg(reviews.rating) as AvgRating, reviews.item_id, reviews.created_at')
-                          /*->leftJoin('reviews', 'items.id', '=', 'reviews.item_id')*/
-                          ->groupBy('reviews.id')
-                          ->orderBy('reviews.created_at', 'desc')
-                          ->get();
-        
-        // $products = Product::all();
-        
-        return view('reviews.sortByDate', ['reviews' => $reviews]);
-        }
+    public function showByTheHighestRating($id)
+    {
+        //This is to show products' details such as product name, price, place of origin, manufacturers etc
+        $item = Item::find($id);
+        //This is to show review details such as author, title, review content, rating etc for each product, order by creation date, 5 reviews per page
+        $reviews = $item->users()->orderBy('pivot_rating', 'desc')->Paginate(5);
+        // dd($reviews);
+
+        return view('items.sortByTheHighestRating', ['item' => $item, 'reviews' => $reviews]);
+    }
 }
 
 

@@ -23,6 +23,10 @@ Route::get('/MyERD',function(){
 Route::get('/Documentation',function(){
     return view('Documentation.documentation');
 });
+
+
+Route::get('/item/{id}/showMostRecentReviwed', 'ItemController@showMostRecentReviwed');
+Route::get('/item/{id}/showByTheHighestRating', 'ItemController@showByTheHighestRating');
 // Route::get('/myERD', function () {return view('ERD.myERD'); });
 
 

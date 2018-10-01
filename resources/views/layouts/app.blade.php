@@ -29,7 +29,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        Items
+                        WELCOME PAGE
                     </a>
                 </div>
 
@@ -38,13 +38,13 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
-
+                    <ul class="nav navbar-nav navbar-right"> <a href="/item">Item list</a></ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a class="nav-link nav-item" href="/myERD"> MyERD diagram</a></li>
-                            <li><a class="nav-link nav-item" href="/item/create">Add a Item</a></li>
+                            <li><a class="nav-link nav-item" href="/MyERD"> MyERD diagram</a></li>
+                            <li><a class="nav-link nav-item" href="/Documentation">Documentation</a></li>
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @elseif (Auth::check() && Auth::user()->isAdmin())
@@ -105,15 +105,15 @@
                             </li>
                         @endif
                         
-                        <div class="btn-group site-location">
-                          <button type="button" class="btn bg text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Sort By
-                          </button>
-                          <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/sortbyreviews">Most Reviews</a><br>
-                            <a class="dropdown-item" href="/sortbyrating">Rating</a>
-                          </div>
-                        </div><br>
+                        <!--<div class="btn-group site-location">-->
+                        <!--  <button type="button" class="btn bg text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                        <!--    Sort By-->
+                        <!--  </button>-->
+                        <!--  <div class="dropdown-menu">-->
+                        <!--    <a class="dropdown-item" href="/sortbyreviews">Most Reviews</a><br>-->
+                        <!--    <a class="dropdown-item" href="/sortbyrating">Rating</a>-->
+                        <!--  </div>-->
+                        <!--</div><br>-->
                     </ul>
                 </div>
             </div>

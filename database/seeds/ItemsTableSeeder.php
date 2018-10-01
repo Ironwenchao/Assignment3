@@ -50,7 +50,7 @@ class ItemsTableSeeder extends Seeder
             'price' => '1250',
             'type' => 'mobile phone',
             'description' => 'Advanced cameras! Wireless charging! All-glass design!',
-            'image'=> 'item_images/AppleiPhone8.jpeg',
+            'image'=> 'item_images/AppleiPhone8.jpg',
             'updated_at' => \DB::raw('CURRENT_TIMESTAMP'),
         ]);
         

@@ -13,21 +13,37 @@
             <p>Type: {{$item->type}}</p>
             <p>Manufacturer: {{$item->manufacturer->name}}</p>
             <p>Description: {{$item->description}}</p>
-            <p><a href='/item/{{$item->id}}/edit'>Edit</a></p>
         </div>
-        <div>
-        <p>
-            <form method="POST" action="/item/{{$item->id}}">
-            {{csrf_field()}}
-            {{ method_field('DELETE') }}
-            <input type="submit" value="Delete" class="link">
-            </form>
-        </p>
-        </div>
+         @if(Auth::check() && Auth::user()->name == 'Moderator')
+            <div>
+            <p>
+                <p><a href='/item/{{$item->id}}/edit'>Edit</a></p>
+                <form method="POST" action="/item/{{$item->id}}">
+                {{csrf_field()}}
+                {{ method_field('DELETE') }}
+                <input type="submit" value="Delete" class="link">
+                </form>
+            </p>
+            </div>
+        @elseif(Auth::check() && Auth::user())
+            <div class="text-left">
+                <li><a href="/review/create">Create a new review</a></li>            
+            </div>
+        @endif
     </div>
     
     <div>
         <h2>Review</h2>
+            <div class="text-left sortby">
+                <button type="button" class="btn bg text-white dropdown-toggle" data-toggle="dropdown">
+                  Sort By
+                </button>
+                    <div class="dropdown-menu">
+                        <a href="/item/{{$item->id}}/showMostRecentReviwed">Most Recent Reviewed</a><br>
+                        <a href="/item/{{$item->id}}/showByTheHighestRating">Highest Rating</a>
+                    </div>
+            </div>
+        
         @foreach ($reviews as $review)
             <div class="row no-gutters text-left product-review">
                     <div class="col-6 col-md-2 list-unstyled">
@@ -37,8 +53,18 @@
                         <li class="rating">Rating: {{$review -> pivot -> rating}} of 5</li>
                         <li class='date'>Date: {{$review -> pivot -> created_at}}</li>
                         <li class='detail'>Review detail: {{$review -> pivot -> detail}}</li>
-                        <li><a href="/review/{{$review -> pivot -> id}}/edit">Edit review</a></li>
-
+                        <div>
+                            @if((Auth::check() && Auth::user()->name == 'Moderator') | (Auth::check() && Auth::user()->id == $review -> pivot -> user_id))
+                                <div><p>
+                                    <a href="/review/{{$review -> pivot -> id}}/edit">Edit review</a>
+                                    <form method="POST" action="/review/{{$review -> pivot -> id}}">
+                                    {{csrf_field()}}
+                                    {{ method_field('DELETE') }}
+                                    <input type="submit" value="Delete" class="link">
+                                    </form>
+                                </p></div>
+                            @endif
+                        </div>
                     </div>
     </div>
         @endforeach
@@ -46,6 +72,5 @@
         {{ $reviews->links()}}
         
         
-    <li><a href="/review/create">Create a new review</a></li>
 
 @endsection
