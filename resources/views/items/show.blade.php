@@ -34,15 +34,17 @@
     
     <div>
         <h2>Review</h2>
-            <div class="text-left sortby">
-                <button type="button" class="btn bg text-white dropdown-toggle" data-toggle="dropdown">
-                  Sort By
-                </button>
-                    <div class="dropdown-menu">
-                        <a href="/item/{{$item->id}}/showMostRecentReviwed">Most Recent Reviewed</a><br>
-                        <a href="/item/{{$item->id}}/showByTheHighestRating">Highest Rating</a>
-                    </div>
+            <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort By
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/item/{{$item->id}}/showMostRecentReviwed">Review Order By Date</a><br>
+                    <a class="dropdown-item" href="/item/{{$item->id}}/showByTheHighestRating">Review Order By Rating</a>
+                  </div>
             </div>
+            
+        
         
         @foreach ($reviews as $review)
             <div class="row no-gutters text-left product-review">

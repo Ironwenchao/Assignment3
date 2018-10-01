@@ -38,31 +38,24 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
                     </ul>
-                    <ul class="nav navbar-nav navbar-right"> <a href="/item">Item list</a></ul>
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
+                            <li><a class="nav-link nav-item" href="/item"> Item list</a></li>
                             <li><a class="nav-link nav-item" href="/MyERD"> MyERD diagram</a></li>
                             <li><a class="nav-link nav-item" href="/Documentation">Documentation</a></li>
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @elseif (Auth::check() && Auth::user()->isAdmin())
                             <li class="nav-item nav-align-center">
-                                <a class="nav-link nav-item" href="/manufacturer">Browse Manufacturers</a>
+                                <a class="nav-link nav-item" href="/item/create">Create a new item</a>
                              </li>
                              
                              <li class="nav-item nav-align-center">
-                                <a class="nav-link nav-item" href="/review/create">Write a Review</a>
-                              </li>
-                              
-                             <li class="nav-item nav-align-center">
-                                <a class="nav-link nav-item" href="/item/create">Add a Product</a>
-                              </li>
-                              
-                              <li class="nav-item nav-align-center">
-                                <a class="nav-link nav-item" href="/manufacturer/create">Create a Manufacturer</a>
-                              </li>
+                                <a class="nav-link nav-item" href="/item">Item list</a>
+                             </li>
+
                         
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -84,6 +77,10 @@
                                 </ul>
                             </li>
                             @else
+                            <li class="nav-item nav-align-center">
+                                <a class="nav-link nav-item" href="/item">Item list</a>
+                             </li>
+                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>

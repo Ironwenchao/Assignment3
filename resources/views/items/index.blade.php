@@ -5,10 +5,6 @@
 @section('content')
 <h1>Item List</h1>
 
-@if(Auth::check() && Auth::user()->name == 'Moderator')
-    <a href="/item/create">Create a new item</a><br>
-@endif
-
     <div>
         @foreach ($items as $item)
                 <div>

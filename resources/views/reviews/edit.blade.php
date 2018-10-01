@@ -4,22 +4,15 @@
 @endsection
 
 @section('content')
-
-    
         <h2>Update {{$items -> name}} Review</h2>
-        
             <div class="container">
             <div class="row">  
             <form method="POST" action="/review/{{$review->id}}">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
-
-
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="rating" class="control-label">rating</label>
-    
                             <input id="rating" type="rating" class="form-control" name="rating" value="{{$review->rating, old('rating') }}">
-    
                             @if ($errors->has('rating'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('rating') }}</strong>
@@ -50,4 +43,4 @@
                     </div>
                 </div>
             </form>
-                
+@endsection                
